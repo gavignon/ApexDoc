@@ -38,7 +38,22 @@ public class FileManager {
                 out.append(c);
             }
         }
+        replaceAll(out,Constants.newLinePlaceHolder,Constants.newLineHTML);
         return out.toString();
+    }
+    
+    /**
+    * There is no replaceAll method for Stringbuilder, so custom method
+    **/
+    public static void replaceAll(StringBuilder builder, String oldString, String newString)
+    {
+       int index = builder.indexOf(oldString);
+       while (index != -1)
+       {
+           builder.replace(index, index + oldString.length(), newString);
+           index += newString.length(); // Move to the end of the replacement
+           index = builder.indexOf(oldString, index);
+       }
     }
 
     public FileManager(String path) {
@@ -219,7 +234,7 @@ public class FileManager {
                 contents += "<a class='methodTOCEntry' href='#" + method.getMethodName() + "'>"
                         + method.getMethodName() + "</a>";
                 if (method.getDescription() != "")
-                    contents += "<div class='methodTOCDescription'>" + method.getDescription() + "</div>";
+                    contents += "<div class='methodTOCDescription'>" + escapeHTML(method.getDescription()) + "</div>";
                 contents += "</li>";
             }
             contents += "</ul>";
@@ -412,6 +427,7 @@ public class FileManager {
     }
 
     public ArrayList<File> getFiles(String path) {
+    	System.out.println(path);
         File folder = new File(path);
         ArrayList<File> listOfFilesToCopy = new ArrayList<File>();
         if (folder != null) {

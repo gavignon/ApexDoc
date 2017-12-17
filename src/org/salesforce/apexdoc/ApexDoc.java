@@ -59,7 +59,8 @@ public class ApexDoc {
 
         // parse command line parameters
         for (int i = 0; i < args.length; i++) {
-
+        	
+        	
             if (args[i] == null) {
                 continue;
             } else if (args[i].equalsIgnoreCase("-s")) {
@@ -79,6 +80,7 @@ public class ApexDoc {
                 printHelp();
                 System.exit(-1);
             }
+            
         }
 
         // default scope to global and public if not specified
@@ -91,6 +93,7 @@ public class ApexDoc {
 
         // find all the files to parse
         fm = new FileManager(targetDirectory);
+
         ArrayList<File> files = fm.getFiles(sourceDirectory);
         ArrayList<ClassModel> cModels = new ArrayList<ClassModel>();
 
@@ -477,8 +480,8 @@ public class ApexDoc {
                         break;
                 }
                 if (j < comment.length()) {
-                    if (inDescription) {
-                        mModel.setDescription(mModel.getDescription() + ' ' + comment.substring(j));
+                    if (inDescription) {                        
+                        mModel.setDescription(mModel.getDescription() + Constants.newLinePlaceHolder + comment.substring(j));
                     } else if (inExample) {
                         // Lets's not include the tag
                         if (j == 0 && comment.substring(2, 10) == "* @example") {
@@ -558,7 +561,7 @@ public class ApexDoc {
                         break;
                 }
                 if (j < comment.length()) {
-                    cModel.setDescription(cModel.getDescription() + ' ' + comment.substring(j));
+                	cModel.setDescription(cModel.getDescription() + Constants.newLinePlaceHolder + comment.substring(j));
                 }
                 continue;
             }

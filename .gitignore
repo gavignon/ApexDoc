@@ -1,1 +1,5 @@
 /target
+/ApexDocumentation
+/.settings
+.classpath
+.project
