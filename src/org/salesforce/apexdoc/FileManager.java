@@ -42,6 +42,22 @@ public class FileManager {
         return out.toString();
     }
     
+    private static String escapeHTMLTOC(String s) {
+        StringBuilder out = new StringBuilder(Math.max(16, s.length()));
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c > 127 || c == '"' || c == '<' || c == '>' || c == '&') {
+                out.append("&#");
+                out.append((int) c);
+                out.append(';');
+            } else {
+                out.append(c);
+            }
+        }
+        replaceAll(out,Constants.newLinePlaceHolder," ");
+        return out.toString();
+    }
+    
     /**
     * There is no replaceAll method for Stringbuilder, so custom method
     **/
@@ -234,7 +250,7 @@ public class FileManager {
                 contents += "<a class='methodTOCEntry' href='#" + method.getMethodName() + "'>"
                         + method.getMethodName() + "</a>";
                 if (method.getDescription() != "")
-                    contents += "<div class='methodTOCDescription'>" + escapeHTML(method.getDescription()) + "</div>";
+                    contents += "<div class='methodTOCDescription'>" + escapeHTMLTOC(method.getDescription()) + "</div>";
                 contents += "</li>";
             }
             contents += "</ul>";

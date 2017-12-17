@@ -5,7 +5,7 @@ public class Constants {
 	public static final String newLinePlaceHolder = "[BR]";
 	public static final String newLineHTML = "<br />";
         
-    public static final String HEADER_OPEN = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />" +
+    public static final String HEADER_OPEN = "<html><head><title>Documentation</title><meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />" +
         "<script type='text/javascript' src='jquery-1.11.1.js'></script>" +
         "<script type='text/javascript' src='CollapsibleList.js'></script>" +                                                                
         "<script type='text/javascript' src='ApexDoc.js'></script>" +                                                                
